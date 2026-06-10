@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Spell Generator</title>
+
+    <!-- Styling -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0e6f6;
+            color: #333;
+            text-align: center;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #spellArea {
+            background-color: #fff;
+            padding: 30px;
+            border: 3px solid gold;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        #generateButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #resetButton {
+            background-color: #f44336;
+            color: white;
+        }   
+
+        ul {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+
+        li {
+            margin:8px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Magical Spell Generator!</h1>
+    <div id="spellArea">
+        <p>Click the button to generate a magical spell!</p>
+    </div>
+
+    <button id="generateButton">Generate Spell</button>
+    <button id="resetButton">Reset</button>
+    <ul id="ingredientsList">
+        <li>Phoenix Feather</li>
+        <li>Dragon Scale</li>
+        <li>Unicorn Horn</li>
+    </ul>
+
+    <!-- JavaScript -->
+    <script>
+        const spellArea = document.getElementById("spellArea");
+const generateButton = document.getElementById("generateButton");
+const resetButton = document.getElementById("resetButton");
+const ingredientsList = document.querySelectorAll("#ingredientsList li");
+
+const colors = [
+    "#FF6B6B",
+    "#4ECDC4",
+    "#FFD93D",
+    "#6A4C93",
+    "#95E06C",
+    "#FF9F1C"
+];
+
+// Generate Spell
+generateButton.addEventListener("click", function () {
+
+    const randomIndex =
+        Math.floor(Math.random() * ingredientsList.length);
+
+    const ingredient =
+        ingredientsList[randomIndex].textContent;
+
+    const colorIndex =
+        Math.floor(Math.random() * colors.length);
+
+    let count = 3;
+
+    spellArea.textContent = count;
+
+    const countdown = setInterval(function () {
+
+        count--;
+
+        if (count > 0) {
+            spellArea.textContent = count;
+        } else {
+
+            clearInterval(countdown);
+
+            spellArea.textContent =
+                `Your spell contains: ${ingredient}`;
+
+            spellArea.style.backgroundColor =
+                colors[colorIndex];
+        }
+
+    }, 1000);
+
+});
+
+// Reset
+resetButton.addEventListener("click", function () {
+
+    spellArea.innerHTML =
+        "<p>Click the button to generate a magical spell!</p>";
+
+    spellArea.style.backgroundColor = "#fff";
+
+});
+
+
+    </script>
+</body>
+</html>
